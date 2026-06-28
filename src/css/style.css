@@ -1,4 +1,3 @@
-
 :root {
   --bg-primary: #0f172a; /* slate-900 */
   --bg-secondary: #1e293b; /* slate-800 */
@@ -27,11 +26,14 @@ body {
   justify-content: center;
   min-height: 100vh;
   padding: 1rem;
+  overflow-x: hidden; /* Evita qualquer barra de rolagem horizontal chata */
 }
 
 main {
   width: 100%;
-  max-width: 1100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 #positioning-screen {
@@ -48,13 +50,21 @@ main {
 }
 
 /* Telas de Instrução e Resultados */
-.screen-container {
+.card {
   background-color: var(--bg-secondary);
-  padding: 2rem 2.5rem;
-  border-radius: 1rem;
-  border: 2px solid var(--border-color);
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  width: 95vw; 
+  max-width: 1350px; 
+  min-height: 60vh;
+  padding: 2.5rem;
+  border-radius: 1.5rem;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; /* Garante que os textos e kbd fiquem no centro do card */
+  margin: 0 auto; /* Força o alinhamento centralizado nas bordas */
 }
 
 .title {
@@ -106,33 +116,6 @@ main {
   font-weight: 600;
 }
 
-.keys-info {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-top: 1.5rem;
-  font-size: 1.125rem;
-}
-
-.keys-info p {
-    font-weight: 600;
-    margin: 0;
-}
-
-kbd {
-  display: inline-block;
-  margin: 0.5rem 0;
-  padding: 0.5rem 1rem;
-  font-size: 1.5rem;
-  font-weight: 700;
-  font-family: inherit;
-  border: 2px solid var(--border-color);
-  border-radius: 0.5rem;
-  background-color: var(--bg-tertiary);
-  color: var(--text-light);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
 .task-rules {
     text-align: left;
     max-width: 400px;
@@ -143,19 +126,6 @@ kbd {
 }
 .task-rules span {
     font-weight: 700;
-}
-
-.start-prompt {
-  margin-top: 2rem;
-  font-size: 1.25rem;
-  font-weight: 600;
-  color: var(--text-light);
-  animation: pulse 1.5s infinite;
-}
-
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.7; }
 }
 
 /* Tela de Teste */
@@ -203,24 +173,69 @@ kbd {
   pointer-events: none;
 }
 
-.test-key-hints {
-  display: flex;
-  justify-content: center;
-  gap: 2.5rem;
-  margin-top: 1.5rem;
+.important-section {
+  margin-top: 25px; padding-top: 20px; border-top: 1px solid var(--border-color);
+}
+.important-section h3 {
+  color: var(--cyan); text-align: center; margin-bottom: 10px; font-size: 1.2rem;
+}
+.important-section p {
+  text-align: center; margin: 0 auto; max-width: 480px; color: var(--text-secondary); font-size: 0.95rem;
 }
 
-.test-key-box {
-  width: 7rem;
-  min-height: 7rem;
-  border: 2px solid var(--border-color);
-  border-radius: 0.75rem;
-  background-color: var(--bg-secondary);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 0.75rem 0.5rem;
+/* --- ESTILO TÁTIL DO TECLADO (Padrão Enigma) --- */
+kbd {
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  border-bottom-width: 4px;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-family: monospace;
+  font-weight: bold;
+  font-size: 1.8rem;
+  color: var(--text-light);
+  display: inline-block;
+  min-width: 60px;
+  text-align: center;
+}
+
+.keys-info { 
+  display: flex; 
+  justify-content: center; 
+  gap: 60px; /* Garante que fiquem lado a lado com espaço */
+  margin: 30px 0; 
+  text-align: center; 
+}
+.keys-info p { margin: 5px 0; color: var(--text-primary); }
+
+/* Feedback Visual das Teclas (Durante o Teste) */
+.key-box {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transition: all 0.1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.key-box kbd { 
+  font-size: 3.5rem; padding: 1rem 2rem; margin-bottom: 10px; transition: all 0.1s; 
+}
+.key-box span { 
+  font-size: 1rem; font-weight: bold; text-transform: uppercase; text-align: center;
+}
+.key-box.active-press kbd { 
+  transform: scale(0.9); border-bottom-width: 1px; margin-top: 3px; color: #fff;
+}
+.key-box.success kbd { 
+  border-color: var(--cyan); background: rgba(34, 211, 238, 0.2); box-shadow: 0 0 20px var(--cyan); color: var(--cyan);
+}
+.key-box.fail kbd { 
+  border-color: var(--error); background: rgba(239, 68, 68, 0.2); box-shadow: 0 0 20px var(--error); color: var(--error);
+}
+
+/* Espaçamento do Start Prompt */
+.start-prompt { 
+  margin-top: 2rem; 
+  font-size: 1.25rem; 
+  font-weight: 600; 
+  color: var(--text-light); 
+  text-align: center;
 }
 
 .test-key-box .test-key-label {
@@ -333,7 +348,6 @@ kbd {
     font-size: 0.75rem;
 }
 
-
 .metric-card p {
   font-size: 2.5rem;
   font-weight: 700;
@@ -366,3 +380,39 @@ kbd {
   background-color: #67e8f9;
   transform: scale(1.05);
 }
+
+.btn-main {
+  display: inline-block;
+  background: #475569;
+  color: var(--cyan);
+  border: none;
+  padding: 15px 60px;
+  border-radius: 12px;
+  font-weight: 800;
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  box-shadow: 0 5px 0 var(--bg-primary);
+  transition: all 0.1s ease;
+  text-transform: uppercase;
+  width: 100%;
+  margin-top: 15px;
+}
+.btn-main:active { transform: translateY(4px); box-shadow: 0 1px 0 var(--bg-primary); }
+
+.btn-action {
+  background: var(--border-color); 
+  color: var(--text-light); 
+  border: none; 
+  padding: 10px 30px;
+  border-radius: 12px; 
+  font-weight: bold; 
+  font-size: 1rem; 
+  cursor: pointer;
+  text-transform: uppercase; 
+  letter-spacing: 1px; 
+  box-shadow: 0 4px 0 var(--bg-primary);
+  transition: all 0.1s ease;
+  margin-top: 15px;
+}
+.btn-action:active { transform: translateY(4px); box-shadow: 0 0 0 var(--bg-primary); }

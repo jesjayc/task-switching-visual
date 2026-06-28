@@ -10,8 +10,8 @@
   <body>
     <main>
       <!-- Tela de Instruções 1 -->
-      <div id="instructions-1" class="screen-container">
-        <h1 class="title">Etapa 1: Temperatura</h1>
+      <div id="instructions-1" class="card">
+        <h1 class="title">Treino da Etapa 1: Temperatura</h1>
         <div class="instructions-content">
           <p> Será apresentada uma série de imagens, uma de cada vez, no meio da tela. O desenho de um termômetro <span class="highlight-cyan">(🌡️)</span> irá aparecer logo acima da imagem.</p>
           <p>Sua tarefa é decidir o mais rápido possível se a imagem representa uma comida <span class="highlight-cyan">FRIA</span> ou <span class="highlight-amber">QUENTE</span>.</p>
@@ -28,15 +28,22 @@
             </div>
           </div>
         </div>
-        <div class="start-prompt">
-          <p class="subtitle">Responda da forma mais rápida e precisa que conseguir. Se você errar, um <span class="highlight-red">X</span> vermelho aparecerá. Simplesmente corrija a sua resposta e continue</p>
-          <p>Pressione <kbd>ESPAÇO</kbd> para iniciar.</p>
-        </div>
+        <div class="important-section">
+          <h3>⚠️ IMPORTANTE</h3>
+          <ul style="list-style: none; padding: 0; max-width: 480px; margin: 0 auto; text-align: center; color: var(--text-secondary); font-size: 0.95rem;">
+              <li style="margin-bottom: 8px;"><strong style="color: var(--text-light);">Responda da forma mais rápida e precisa que conseguir.</strong></li>
+              <li style="margin-bottom: 8px;"><strong style="color: var(--text-light);">Se você errar, um X vermelho aparecerá.</strong></li>
+              <li><strong style="color: var(--text-light);">Simplesmente corrija a sua resposta e continue o teste.</strong></li>
+          </ul>
+      </div>
+      <div class="start-prompt">
+          <button class="btn-main">ESTOU PRONTO (ESPAÇO)</button>
+      </div>
       </div>
 
       <!-- Tela de Instruções 2 -->
-      <div id="instructions-2" class="screen-container hidden">
-        <h1 class="title">Etapa 2: Sabor</h1>
+      <div id="instructions-2" class="card hidden">
+        <h1 class="title">Treino da Etapa 2: Sabor</h1>
         <div class="instructions-content">
           <p>Agora, a regra mudou. Será apresentada uma série de imagens, uma de cada vez, no meio da tela. O desenho de uma boca <span class="highlight-cyan">(👄)</span> irá aparecer logo acima da imagem.</p>
           <p>Sua tarefa é decidir o mais rápido possível se a imagem representa uma comida <span class="highlight-cyan">DOCE</span> ou <span class="highlight-amber">SALGADA</span>.</p>
@@ -53,16 +60,22 @@
             </div>
           </div>
         </div>
-        <div class="start-prompt">
-          <p class="subtitle">Responda da forma mais rápida e precisa que conseguir. Se você errar, um <span class="highlight-red">X</span> vermelho aparecerá. Simplesmente corrija a sua resposta e continue.</p>
-          <p>Pressione <kbd>ESPAÇO</kbd> para iniciar.</p>
-          
-        </div>
+        <div class="important-section">
+          <h3>⚠️ IMPORTANTE</h3>
+          <ul style="list-style: none; padding: 0; max-width: 480px; margin: 0 auto; text-align: center; color: var(--text-secondary); font-size: 0.95rem;">
+              <li style="margin-bottom: 8px;"><strong style="color: var(--text-light);">Responda da forma mais rápida e precisa que conseguir.</strong></li>
+              <li style="margin-bottom: 8px;"><strong style="color: var(--text-light);">Se você errar, um X vermelho aparecerá.</strong></li>
+              <li><strong style="color: var(--text-light);">Simplesmente corrija a sua resposta e continue o teste.</strong></li>
+          </ul>
+      </div>
+      <div class="start-prompt">
+          <button class="btn-main">ESTOU PRONTO (ESPAÇO)</button>
+      </div>
       </div>
 
       <!-- Tela de Instruções 3 -->
-      <div id="instructions-3" class="screen-container hidden">
-        <h1 class="title">Etapa 3: Alternando Tarefas</h1>
+      <div id="instructions-3" class="card hidden">
+        <h1 class="title">Treino da Etapa 3: Alternando Tarefas</h1>
         <div class="instructions-content">
           <p>Agora, vamos combinar as duas tarefas. Preste atenção ao símbolo acima da imagem a cada rodada!</p>
           <div class="task-rules">
@@ -82,23 +95,33 @@
             </div>
           </div>
         </div>
-        <div class="start-prompt">
-          <p class="subtitle">Responda da forma mais rápida e precisa que conseguir. Se você errar, um <span class="highlight-red">X</span> vermelho aparecerá. Simplesmente corrija a sua resposta e continue.</p>
-          <p>Pressione <kbd>ESPAÇO</kbd> para iniciar.</p>
-          
-        </div>
+        <div class="important-section">
+          <h3>⚠️ IMPORTANTE</h3>
+          <ul style="list-style: none; padding: 0; max-width: 480px; margin: 0 auto; text-align: center; color: var(--text-secondary); font-size: 0.95rem;">
+              <li style="margin-bottom: 8px;"><strong style="color: var(--text-light);">Responda da forma mais rápida e precisa que conseguir.</strong></li>
+              <li style="margin-bottom: 8px;"><strong style="color: var(--text-light);">Se você errar, um X vermelho aparecerá.</strong></li>
+              <li><strong style="color: var(--text-light);">Simplesmente corrija a sua resposta e continue o teste.</strong></li>
+          </ul>
+      </div>
+      <div class="start-prompt">
+          <button class="btn-main">ESTOU PRONTO (ESPAÇO)</button>
+      </div>
       </div>
 
       <!-- Tela de Posicionamento -->
-      <div id="positioning-screen" class="screen-container hidden">
-        <h1 class="title">Preparação</h1>
+      <div id="positioning-screen" class="card hidden">
+        <h2 class="title">Preparação</h2>
         <div class="instructions-content">
-          <p style="font-size:1.4rem; text-align:center; margin: 2rem 0; white-space: nowrap;">
-            Posicione seu indicador esquerdo sobre a tecla <kbd>A</kbd> e o direito sobre a tecla <kbd>L</kbd>
+          <p style="font-size: 1.3rem; margin-bottom: 2rem; text-align: center;">
+            Posicione seu indicador esquerdo sobre a tecla <kbd>A</kbd><br>e o direito sobre a tecla <kbd>L</kbd>
           </p>
         </div>
+        <div class="keys-info" style="margin-top: 0; margin-bottom: 2rem;">
+          <div><kbd>A</kbd><p style="margin-top: 10px;">Mão <strong>Esquerda</strong></p></div>
+          <div><kbd>L</kbd><p style="margin-top: 10px;">Mão <strong>Direita</strong></p></div>
+      </div>
         <div class="start-prompt">
-          <p>Pressione <kbd>ESPAÇO</kbd> para iniciar.</p>
+          <button class="btn-main">COMEÇAR ETAPA DE TREINO (ESPAÇO)</button>
         </div>
       </div>
 
@@ -113,14 +136,14 @@
             <span>X</span>
             <p>Tente novamente</p>
           </div>
-          <div class="test-key-hints">
-            <div class="test-key-box cyan">
-              <span class="test-key-label">A</span>
-              <span class="test-key-meaning" id="test-key-a-meaning"></span>
+          <div class="keys-info" style="margin-top: 1.5rem;">
+            <div class="key-box" id="key-a">
+                <kbd>A</kbd>
+                <span id="test-key-a-meaning" style="color: var(--cyan);"></span>
             </div>
-            <div class="test-key-box amber">
-              <span class="test-key-label">L</span>
-              <span class="test-key-meaning" id="test-key-l-meaning"></span>
+            <div class="key-box" id="key-l">
+                <kbd>L</kbd>
+                <span id="test-key-l-meaning" style="color: var(--amber);"></span>
             </div>
           </div>
         </div>
@@ -128,7 +151,7 @@
       </div>
 
       <!-- Tela de Transição (Treino → Teste Oficial) -->
-      <div id="transition-screen" class="screen-container hidden">
+      <div id="transition-screen" class="card hidden">
         <h1 class="title">Treino Concluído</h1>
         <div class="instructions-content">
           <p>Agora começa o <strong>teste oficial</strong> desta etapa. As regras são as mesmas do treino.</p>
@@ -136,7 +159,7 @@
             <div>
               <p>Pressione a tecla</p>
               <kbd>A</kbd>
-              <p id="transition-key-a-text"></p>
+              <p class="highlight-cyan" id="transition-key-a-text"></p>
             </div>
             <div>
               <p>Pressione a tecla</p>
@@ -146,16 +169,21 @@
           </div>
         </div>
         <div class="start-prompt">
-          <p>Pressione <kbd>ESPAÇO</kbd> para iniciar o teste oficial.</p>
+          <button class="btn-main">COMEÇAR ETAPA OFICIAL (ESPAÇO)</button>
         </div>
       </div>
 
       <!-- Tela de Resultados -->
-      <div id="results-screen" class="screen-container hidden">
-        <h1 class="title-light">Teste Concluído</h1>
-        <p class="subtitle-light">Clique no botão abaixo para baixar o arquivo CSV com os resultados.</p>
-        <button id="download-csv-button">Baixar Resultados (CSV)</button>
-        <button id="restart-button">Reiniciar Teste</button>
+      <div id="results-screen" class="card hidden">
+        <h1 class="title">Teste Concluído</h1>
+        <p class="subtitle" style="margin-bottom: 2rem;">Salve os resultados gerados pelo teste.</p>
+        
+        <div style="display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 400px; margin: 0 auto;">
+            <button id="download-csv-button" class="btn-main">BAIXAR RESULTADOS (CSV)</button>
+            <button id="copy-bkp-button" class="btn-action">COPIAR DADOS BRUTOS (BKP)</button>
+        </div>
+        
+        <button id="restart-button" class="btn-action" style="background: var(--bg-tertiary); max-width: 400px; margin: 30px auto 0;">Reiniciar Teste</button>
       </div>
     </main>
 

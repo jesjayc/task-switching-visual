@@ -1,4 +1,3 @@
-
 document.addEventListener('DOMContentLoaded', () => {
   // --- DADOS E CONSTANTES ---
   const FOOD_ITEMS = [
@@ -67,9 +66,18 @@ document.addEventListener('DOMContentLoaded', () => {
   const restartButton = document.getElementById('restart-button');
 
   const KEY_HINTS_BY_STAGE = {
-    1: { a: 'FRIA', l: 'QUENTE' },
-    2: { a: 'DOCE', l: 'SALGADA' },
-    3: { a: 'FRIA<br>ou DOCE', l: 'QUENTE<br>ou SALGADA' },
+    1: { 
+        a: '<span style="color: var(--cyan);">FRIA</span>', 
+        l: '<span style="color: var(--amber);">QUENTE</span>' 
+    },
+    2: { 
+        a: '<span style="color: var(--cyan);">DOCE</span>', 
+        l: '<span style="color: var(--amber);">SALGADA</span>' 
+    },
+    3: { 
+        a: '<span style="color: var(--cyan);">FRIA<br>ou DOCE</span>', 
+        l: '<span style="color: var(--amber);">QUENTE<br>ou SALGADA</span>' 
+    },
   };
 
   // --- FUNÇÕES DE CONTROLE DE TELA ---
@@ -144,6 +152,8 @@ document.addEventListener('DOMContentLoaded', () => {
   function handleTestKey(event) {
     const key = event.key.toLowerCase();
     if (key !== 'a' && key !== 'l') return;
+    
+    // Se estiver no castigo visual do erro do treino, ignora os cliques extras
     if (!testFeedbackEl.classList.contains('hidden')) return;
 
     const { word, criterion, isSwitchTrial } = getTrialInfo();
@@ -157,18 +167,62 @@ document.addEventListener('DOMContentLoaded', () => {
         correctKey = foodItem.flavor === 'Doce' ? 'a' : 'l';
     }
 
+    const isDemo = gameState.endsWith('_DEMO');
+    const reactionTime = Date.now() - startTime;
+
+    // 1. CAPTURA O BOTÃO NA TELA E APLICA O EFEITO DE AFUNDAR (TÁTIL)
+    const btn = document.getElementById(`key-${key}`);
+    if (btn) btn.classList.add('active-press');
+
     if (key === correctKey) {
-      const reactionTime = Date.now() - startTime;
+      // --- ACERTO ---
+      // Só acende o verde (success) se for na fase de TREINO
+      if (isDemo && btn) btn.classList.add('success');
+
       stageResults.push({
         trialIndex: currentIndex, stage: stageNumber, word, criterion,
         isSwitchTrial, reactionTime, errorCount, correctKey,
       });
-      currentIndex++;
-      renderCurrentTrial();
+
+      // Aguarda 150ms para mostrar a animação de clique antes de avançar
+      setTimeout(() => {
+          if (btn) btn.classList.remove('active-press', 'success');
+          currentIndex++;
+          renderCurrentTrial();
+      }, 150);
+
     } else {
+      // --- ERRO ---
       errorCount++;
-      testFeedbackEl.classList.remove('hidden');
-      feedbackTimeout = setTimeout(() => testFeedbackEl.classList.add('hidden'), 500);
+      
+      if (isDemo) {
+          // == TREINO (Punitivo) ==
+          // Fica vermelho, mostra o X e exige correção
+          if (btn) btn.classList.add('fail');
+          testFeedbackEl.classList.remove('hidden');
+          
+          // Remove o efeito vermelho e o X depois de 500ms
+          feedbackTimeout = setTimeout(() => {
+              if (btn) btn.classList.remove('active-press', 'fail');
+              testFeedbackEl.classList.add('hidden');
+          }, 500);
+
+      } else {
+          // == TESTE OFICIAL (Estéril) ==
+          // Grava o erro e avança silenciosamente (sem vermelho, apenas o afundamento)
+          stageResults.push({
+            trialIndex: currentIndex, stage: stageNumber, word, criterion,
+            isSwitchTrial, reactionTime, errorCount, correctKey,
+          });
+          errorCount = 0; // Zera para o próximo estímulo
+          
+          // Aguarda 150ms mantendo o ritmo idêntico ao de acerto
+          setTimeout(() => {
+              if (btn) btn.classList.remove('active-press');
+              currentIndex++;
+              renderCurrentTrial();
+          }, 150);
+      }
     }
   }
 
@@ -269,6 +323,27 @@ document.addEventListener('DOMContentLoaded', () => {
     URL.revokeObjectURL(url);
   }
 
+  // --- BACKUP: COPIAR PARA ÁREA DE TRANSFERÊNCIA ---
+  function copyToClipboard() {
+    const fields = ['indice_trial', 'etapa', 'palavra', 'criterio', 'eh_troca', 'tempo_reacao_ms', 'numero_erros', 'tecla_correta'];
+    const rows = results.map((r, i) => [
+      i + 1, r.stage, r.word, r.criterion, r.isSwitchTrial === undefined ? '' : (r.isSwitchTrial ? 'sim' : 'nao'),
+      r.reactionTime, r.errorCount, r.correctKey
+    ]);
+    
+    let clipText = fields.join('\t') + '\n';
+    rows.forEach(row => { clipText += row.join('\t') + '\n'; });
+    
+    navigator.clipboard.writeText(clipText).then(() => {
+        alert("Resultados copiados! Cole (Ctrl+V) no Excel.");
+    }).catch(err => {
+        alert("Erro ao copiar. Tente baixar o CSV.");
+    });
+  }
+  
+  // Conecta o novo botão que vamos criar no HTML
+  document.getElementById('copy-bkp-button').addEventListener('click', copyToClipboard);
+
   // --- INICIALIZAÇÃO E REINÍCIO ---
   function init() {
     gameState = 'INSTRUCTIONS_1';
@@ -279,6 +354,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   document.getElementById('download-csv-button').addEventListener('click', downloadCSV);
   restartButton.addEventListener('click', init);
+
+  // --- SUPORTE A CLIQUE NOS BOTÕES NOVOS ---
+  document.querySelectorAll('.btn-main').forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Dispara um evento simulado de "Espaço" para aproveitar a lógica existente de navegação
+        window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Space' }));
+    });
+  });
 
   init();
 });
