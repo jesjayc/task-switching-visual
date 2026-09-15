@@ -289,6 +289,14 @@ const STAGE_3_DEMO = [
 
 // Enviar por email - antes era downloadCSV
 async function sendResultsByEmail() {
+  // 1. Abre uma caixinha pedindo o ID do participante
+  let idParticipante = prompt("Por favor, digite o ID ou nome do participante:");
+  
+  // Se o pesquisador cancelar ou deixar em branco, cria um ID automático
+  if (!idParticipante) {
+      idParticipante = `Participante-Visual-${Date.now()}`;
+  }
+
   const btn = document.getElementById('download-csv-button');
   btn.disabled = true;
   btn.innerHTML = '⏳ Enviando...';
@@ -304,14 +312,14 @@ async function sendResultsByEmail() {
   const csvContent = [headerRow, ...fieldRows].map(row => row.join(',')).join('\n');
 
   try {
-      const response = await fetch('/api/enviar', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-              dadosCSV: csvContent,
-              participante: `Participante-Visual-${Date.now()}`
-          })
-      });
+    const response = await fetch('/api/enviar', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            dadosCSV: csvContent,
+            participante: idParticipante // <-- 2. Usa o nome que foi digitado na caixinha
+        })
+    });
 
       if (response.ok) {
           btn.innerHTML = '✅ Enviado com Sucesso!';
