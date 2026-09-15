@@ -289,49 +289,50 @@ const STAGE_3_DEMO = [
 
 // Enviar por email - antes era downloadCSV
 async function sendResultsByEmail() {
-  // 1. Abre uma caixinha pedindo o ID do participante
   let idParticipante = prompt("Por favor, digite o ID ou nome do participante:");
   
-  // Se o pesquisador cancelar ou deixar em branco, cria um ID automático
   if (!idParticipante) {
       idParticipante = `Participante-Visual-${Date.now()}`;
   }
 
   const btn = document.getElementById('download-csv-button');
   btn.disabled = true;
-  btn.innerHTML = '⏳ Enviando...';
+  btn.innerHTML = '⏳ ENVIANDO...';
 
+  // Armamos el CSV tradicional separado por punto y coma
   const fields = ['indice_trial', 'etapa', 'palavra', 'criterio', 'eh_troca', 'tempo_reacao_ms', 'numero_erros', 'tecla_correta'];
-  const rows = results.map((r, i) => [
-      i + 1, r.stage, r.word, r.criterion, r.isSwitchTrial === undefined ? '' : (r.isSwitchTrial ? 'sim' : 'nao'),
-      r.reactionTime, r.errorCount, r.correctKey
-  ]);
   
-  const headerRow = ['campo', ...rows.map((_, i) => i + 1)];
-  const fieldRows = fields.map((field, fi) => [field, ...rows.map(row => row[fi])]);
-  const csvContent = [headerRow, ...fieldRows].map(row => row.join(',')).join('\n');
+  const headerRow = fields.join(';');
+  const rows = results.map((r, i) => {
+      const troca = r.isSwitchTrial === undefined ? '' : (r.isSwitchTrial ? 'sim' : 'nao');
+      return [i + 1, r.stage, r.word, r.criterion, troca, r.reactionTime, r.errorCount, r.correctKey].join(';');
+  });
+  
+  const csvContent = [headerRow, ...rows].join('\n');
 
   try {
-    const response = await fetch('/api/enviar', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-            dadosCSV: csvContent,
-            participante: idParticipante // <-- 2. Usa o nome que foi digitado na caixinha
-        })
-    });
+      const response = await fetch('/api/enviar', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+              dadosCSV: csvContent,
+              participante: idParticipante
+          })
+      });
 
       if (response.ok) {
-          btn.innerHTML = '✅ Enviado com Sucesso!';
+          btn.innerHTML = '✅ ENVIADO COM SUCESSO!';
           btn.style.background = 'var(--accent)';
           btn.style.color = '#000';
+          btn.style.opacity = '1'; // ¡Esto le quita el aspecto apagado!
       } else {
-          throw new Error('Erro no servidor');
+          throw new Error('Error en el servidor');
       }
   } catch (error) {
-      console.error("Erro:", error);
-      btn.innerHTML = '❌ Erro. Tentar novamente';
+      console.error("Error:", error);
+      btn.innerHTML = '❌ ERRO. TENTAR NOVAMENTE';
       btn.style.background = 'var(--error)';
+      btn.style.opacity = '1';
       btn.disabled = false;
   }
 }
