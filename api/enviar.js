@@ -25,7 +25,7 @@ export default async function handler(req, res) {
             },
             body: JSON.stringify({
                 from: 'Pesquisa Task-Switching VISUAL <onboarding@resend.dev>', 
-                to: ['EMAIL_DE_DESTINO_AQUI@gmail.com'], // <-- COLOCAR O EMAIL DE DESTINO
+                to: ['bafeppgufcspa@gmail.com'], // <-- COLOCAR O EMAIL DE DESTINO
                 subject: `Resultados do Experimento - ${participante}`,
                 html: `<p>Olá! Seguem em anexo os resultados de <strong>${participante}</strong>.</p>`,
                 attachments: [
