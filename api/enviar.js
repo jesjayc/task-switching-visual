@@ -12,7 +12,7 @@ export default async function handler(req, res) {
     const { dadosCSV, participante } = req.body;
 
     try {
-        // Agregamos el BOM (\uFEFF) para Excel y convertimos todo a Base64
+        // UNIMOS o BOM (FEFF) para Excel e convertemos a BASE64
         const csvBuffer = Buffer.from('\uFEFF' + dadosCSV, 'utf-8');
         const base64CSV = csvBuffer.toString('base64');
 
@@ -25,12 +25,12 @@ export default async function handler(req, res) {
             body: JSON.stringify({
                 from: 'Pesquisa Task-Switching VISUAL <onboarding@resend.dev>', 
                 to: ['bafeppgufcspa@gmail.com'],
-                subject: `Resultados del Experimento - ${participante}`,
-                html: `<p>Hola, adjunto los resultados de <strong>${participante}</strong>.</p>`,
+                subject: `Resultados do Experimento - ${participante}`,
+                html: `<p>Olá! Seguem em anexo os resultados de <strong>${participante}</strong>.</p>`,
                 attachments: [
                     {
                         filename: `resultados-${participante}.csv`,
-                        content: base64CSV // Enviado de forma segura en Base64
+                        content: base64CSV // enviado em base64, agora com os dados bem formatados
                     }
                 ]
             })
