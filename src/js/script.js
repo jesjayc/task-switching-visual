@@ -299,7 +299,6 @@ async function sendResultsByEmail() {
   btn.disabled = true;
   btn.innerHTML = '⏳ ENVIANDO...';
 
-  // Armamos el CSV tradicional separado por punto y coma
   const fields = ['indice_trial', 'etapa', 'palavra', 'criterio', 'eh_troca', 'tempo_reacao_ms', 'numero_erros', 'tecla_correta'];
   
   const headerRow = fields.join(';');
@@ -324,7 +323,7 @@ async function sendResultsByEmail() {
           btn.innerHTML = '✅ ENVIADO COM SUCESSO!';
           btn.style.background = 'var(--accent)';
           btn.style.color = '#000';
-          btn.style.opacity = '1'; // ¡Esto le quita el aspecto apagado!
+          btn.style.opacity = '1';
       } else {
           throw new Error('Error en el servidor');
       }
