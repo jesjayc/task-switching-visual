@@ -57,6 +57,11 @@ const STAGE_3_DEMO = [
   let startTime = 0;
   let errorCount = 0;
   let feedbackTimeout;
+  let aborted = false;
+
+  const ABORT_CODE = "0001";
+  let abortBuffer = "";
+  let abortBufferTimer = null;
 
   // --- ELEMENTOS DO DOM ---
   const screens = {
@@ -353,6 +358,52 @@ function copyToClipboard() {
       alert("Erro ao copiar. Tente baixar o CSV.");
   });
 }
+
+// --- SISTEMA DE ABORTO DE SEGURANÇA (END42) ---
+function abortTest() {
+  // 1. Verifica se estamos dentro do experimento (e não nas instruções ou resultados)
+  if (gameState === 'RESULTS' || gameState.startsWith('INSTRUCTIONS')) return;
+  
+  aborted = true;
+  
+  // 2. Remove os "escutadores" de teclado ativos para travar o teste
+  window.removeEventListener('keydown', handleTestKey);
+  window.removeEventListener('keydown', handlePositioningKey);
+  window.removeEventListener('keydown', handleTransitionKey);
+  window.removeEventListener('keydown', handleInstructionKey);
+  
+  // 3. Se não houver nenhum dado coletado no array principal de resultados, recarrega a página.
+  if (results.length === 0 && stageResults.length === 0) {
+      location.reload();
+      return;
+  }
+  
+  // 4. Salva o que foi coletado até agora na etapa atual (mesmo não finalizada)
+  if (stageResults.length > 0) {
+       results.push(...stageResults);
+  }
+  
+  // 5. Muda o estado e pula direto para a tela final
+  gameState = 'RESULTS';
+  showScreen('RESULTS');
+}
+
+window.addEventListener('keydown', (e) => {
+  // Ignora teclas especiais; aceita apenas letras e números
+  if (e.key.length !== 1 || !/[a-z0-9]/i.test(e.key)) return;
+  
+  // Mantém um buffer das últimas 4 teclas digitadas (ABORT_CODE = "0001")
+  abortBuffer = (abortBuffer + e.key.toLowerCase()).slice(-ABORT_CODE.length);
+  
+  // Zera o buffer se houver pausa maior que 2 segundos na digitação
+  clearTimeout(abortBufferTimer);
+  abortBufferTimer = setTimeout(() => { abortBuffer = ""; }, 2000);
+  
+  if (abortBuffer === ABORT_CODE) {
+      abortBuffer = "";
+      abortTest();
+  }
+});
 
 // --- INICIALIZAÇÃO E REINÍCIO ---
 function init() {
