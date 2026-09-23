@@ -57,8 +57,9 @@ const STAGE_3_DEMO = [
   let startTime = 0;
   let errorCount = 0;
   let feedbackTimeout;
+  
+  // --- SISTEMA DE ABORTO DE SEGURANÇA (0001) ---
   let aborted = false;
-
   const ABORT_CODE = "0001";
   let abortBuffer = "";
   let abortBufferTimer = null;
@@ -359,7 +360,7 @@ function copyToClipboard() {
   });
 }
 
-// --- SISTEMA DE ABORTO DE SEGURANÇA (END42) ---
+// --- SISTEMA DE ABORTO DE SEGURANÇA (0001) ---
 function abortTest() {
   // 1. Verifica se estamos dentro do experimento (e não nas instruções ou resultados)
   if (gameState === 'RESULTS' || gameState.startsWith('INSTRUCTIONS')) return;
