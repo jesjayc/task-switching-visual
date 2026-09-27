@@ -19,35 +19,17 @@ document.addEventListener('DOMContentLoaded', () => {
     return img;
   });
 
-  const STAGE_1_DEMO = [ 
-    'Café', 'Sushi', 'Bolo', 'Refrigerante', 'Presunto', 'Panqueca', 'Pizza', 'Chá', 'Hambúrguer', 'Sorvete', 
-    'Sopa', 'Churros', 'Salada', 'Macarrão', 'Suco', 'Queijo', 'Iogurte', 'Batata Frita', 'Pudim', 'Sanduíche' 
-];
-
-const STAGE_2_DEMO = [ 
-    'Macarrão', 'Chá', 'Batata Frita', 'Iogurte', 'Pizza', 'Café', 'Sorvete', 'Presunto', 'Sanduíche', 'Sushi', 
-    'Bolo', 'Suco', 'Churros', 'Hambúrguer', 'Pudim', 'Refrigerante', 'Sopa', 'Queijo', 'Salada', 'Panqueca' 
-];
-
-const STAGE_3_DEMO = [
-    { word: 'Queijo', criterion: 'Temperatura', isSwitch: false }, { word: 'Panqueca', criterion: 'Temperatura', isSwitch: false },
-    { word: 'Refrigerante', criterion: 'Sabor', isSwitch: true }, { word: 'Sushi', criterion: 'Sabor', isSwitch: false },
-    { word: 'Café', criterion: 'Sabor', isSwitch: false }, { word: 'Salada', criterion: 'Temperatura', isSwitch: true },
-    { word: 'Churros', criterion: 'Sabor', isSwitch: true }, { word: 'Macarrão', criterion: 'Sabor', isSwitch: false },
-    { word: 'Pudim', criterion: 'Temperatura', isSwitch: true }, { word: 'Hambúrguer', criterion: 'Temperatura', isSwitch: false },
-    { word: 'Chá', criterion: 'Temperatura', isSwitch: false }, { word: 'Batata Frita', criterion: 'Temperatura', isSwitch: false },
-    { word: 'Iogurte', criterion: 'Sabor', isSwitch: true }, { word: 'Sanduíche', criterion: 'Sabor', isSwitch: false },
-    { word: 'Sopa', criterion: 'Sabor', isSwitch: false }, { word: 'Presunto', criterion: 'Temperatura', isSwitch: true },
-    { word: 'Bolo', criterion: 'Sabor', isSwitch: true }, { word: 'Suco', criterion: 'Sabor', isSwitch: false },
-    { word: 'Pizza', criterion: 'Temperatura', isSwitch: true }, { word: 'Sorvete', criterion: 'Temperatura', isSwitch: false }
-];
+  const STAGE_1_DEMO = [ 'Café', 'Sushi', 'Bolo', 'Refrigerante', 'Presunto', 'Panqueca', 'Pizza', 'Chá', 'Hambúrguer', 'Sorvete', 'Sopa', 'Churros', 'Salada', 'Macarrão', 'Suco', 'Queijo', 'Iogurte', 'Batata Frita', 'Pudim', 'Sanduíche' ];
+  const STAGE_2_DEMO = [ 'Macarrão', 'Chá', 'Batata Frita', 'Iogurte', 'Pizza', 'Café', 'Sorvete', 'Presunto', 'Sanduíche', 'Sushi', 'Bolo', 'Suco', 'Churros', 'Hambúrguer', 'Pudim', 'Refrigerante', 'Sopa', 'Queijo', 'Salada', 'Panqueca' ];
+  const STAGE_3_DEMO = [ { word: 'Queijo', criterion: 'Temperatura', isSwitch: false }, { word: 'Panqueca', criterion: 'Temperatura', isSwitch: false }, { word: 'Refrigerante', criterion: 'Sabor', isSwitch: true }, { word: 'Sushi', criterion: 'Sabor', isSwitch: false }, { word: 'Café', criterion: 'Sabor', isSwitch: false }, { word: 'Salada', criterion: 'Temperatura', isSwitch: true }, { word: 'Churros', criterion: 'Sabor', isSwitch: true }, { word: 'Macarrão', criterion: 'Sabor', isSwitch: false }, { word: 'Pudim', criterion: 'Temperatura', isSwitch: true }, { word: 'Hambúrguer', criterion: 'Temperatura', isSwitch: false }, { word: 'Chá', criterion: 'Temperatura', isSwitch: false }, { word: 'Batata Frita', criterion: 'Temperatura', isSwitch: false }, { word: 'Iogurte', criterion: 'Sabor', isSwitch: true }, { word: 'Sanduíche', criterion: 'Sabor', isSwitch: false }, { word: 'Sopa', criterion: 'Sabor', isSwitch: false }, { word: 'Presunto', criterion: 'Temperatura', isSwitch: true }, { word: 'Bolo', criterion: 'Sabor', isSwitch: true }, { word: 'Suco', criterion: 'Sabor', isSwitch: false }, { word: 'Pizza', criterion: 'Temperatura', isSwitch: true }, { word: 'Sorvete', criterion: 'Temperatura', isSwitch: false } ];
 
   const STAGE_1_OFFICIAL = [ 'Pudim', 'Sopa', 'Suco', 'Batata Frita', 'Pizza', 'Café', 'Sanduíche', 'Café', 'Panqueca', 'Presunto', 'Queijo', 'Sushi', 'Churros', 'Sushi', 'Sorvete', 'Macarrão', 'Hambúrguer', 'Iogurte', 'Panqueca', 'Sopa', 'Chá', 'Pizza', 'Sanduíche', 'Sorvete', 'Salada', 'Presunto', 'Bolo', 'Refrigerante', 'Salada', 'Iogurte', 'Queijo', 'Suco', 'Hambúrguer', 'Churros', 'Batata Frita', 'Pudim', 'Macarrão', 'Chá', 'Bolo', 'Refrigerante' ];
   const STAGE_2_OFFICIAL = [ 'Café', 'Panqueca', 'Presunto', 'Macarrão', 'Suco', 'Refrigerante', 'Sopa', 'Sushi', 'Macarrão', 'Sushi', 'Presunto', 'Sopa', 'Chá', 'Churros', 'Iogurte', 'Pudim', 'Sanduíche', 'Churros', 'Pudim', 'Sorvete', 'Salada', 'Pizza', 'Batata Frita', 'Iogurte', 'Suco', 'Queijo', 'Bolo', 'Hambúrguer', 'Salada', 'Pizza', 'Batata Frita', 'Café', 'Chá', 'Sanduíche', 'Sorvete', 'Bolo', 'Refrigerante', 'Hambúrguer', 'Queijo', 'Presunto' ];
   const STAGE_3_OFFICIAL = [ { word: 'Churros', criterion: 'Temperatura', isSwitch: false }, { word: 'Batata Frita', criterion: 'Temperatura', isSwitch: false }, { word: 'Hambúrguer', criterion: 'Sabor', isSwitch: true }, { word: 'Pudim', criterion: 'Sabor', isSwitch: false }, { word: 'Sopa', criterion: 'Sabor', isSwitch: false }, { word: 'Bolo', criterion: 'Sabor', isSwitch: false }, { word: 'Chá', criterion: 'Sabor', isSwitch: false }, { word: 'Sanduíche', criterion: 'Sabor', isSwitch: false }, { word: 'Salada', criterion: 'Temperatura', isSwitch: true }, { word: 'Pizza', criterion: 'Sabor', isSwitch: true }, { word: 'Hambúrguer', criterion: 'Sabor', isSwitch: false }, { word: 'Churros', criterion: 'Temperatura', isSwitch: true }, { word: 'Hambúrguer', criterion: 'Temperatura', isSwitch: false }, { word: 'Chá', criterion: 'Sabor', isSwitch: true }, { word: 'Sorvete', criterion: 'Temperatura', isSwitch: true }, { word: 'Iogurte', criterion: 'Temperatura', isSwitch: false }, { word: 'Suco', criterion: 'Sabor', isSwitch: true }, { word: 'Pizza', criterion: 'Sabor', isSwitch: false }, { word: 'Salada', criterion: 'Sabor', isSwitch: false }, { word: 'Chá', criterion: 'Temperatura', isSwitch: true }, { word: 'Salada', criterion: 'Sabor', isSwitch: true }, { word: 'Sorvete', criterion: 'Sabor', isSwitch: false }, { word: 'Bolo', criterion: 'Temperatura', isSwitch: true }, { word: 'Sopa', criterion: 'Temperatura', isSwitch: false }, { word: 'Macarrão', criterion: 'Sabor', isSwitch: true }, { word: 'Sushi', criterion: 'Sabor', isSwitch: false }, { word: 'Macarrão', criterion: 'Temperatura', isSwitch: true }, { word: 'Sopa', criterion: 'Temperatura', isSwitch: false }, { word: 'Panqueca', criterion: 'Temperatura', isSwitch: false }, { word: 'Queijo', criterion: 'Sabor', isSwitch: true }, { word: 'Iogurte', criterion: 'Temperatura', isSwitch: true }, { word: 'Pizza', criterion: 'Temperatura', isSwitch: false }, { word: 'Iogurte', criterion: 'Sabor', isSwitch: true }, { word: 'Café', criterion: 'Sabor', isSwitch: false }, { word: 'Presunto', criterion: 'Temperatura', isSwitch: true }, { word: 'Pudim', criterion: 'Sabor', isSwitch: true }, { word: 'Macarrão', criterion: 'Sabor', isSwitch: false }, { word: 'Presunto', criterion: 'Temperatura', isSwitch: true }, { word: 'Refrigerante', criterion: 'Sabor', isSwitch: true }, { word: 'Sushi', criterion: 'Temperatura', isSwitch: true }, { word: 'Bolo', criterion: 'Temperatura', isSwitch: false }, { word: 'Refrigerante', criterion: 'Temperatura', isSwitch: false }, { word: 'Hambúrguer', criterion: 'Sabor', isSwitch: true }, { word: 'Suco', criterion: 'Temperatura', isSwitch: true }, { word: 'Queijo', criterion: 'Temperatura', isSwitch: false }, { word: 'Sushi', criterion: 'Sabor', isSwitch: true }, { word: 'Pudim', criterion: 'Temperatura', isSwitch: true }, { word: 'Sorvete', criterion: 'Temperatura', isSwitch: false }, { word: 'Iogurte', criterion: 'Sabor', isSwitch: true }, { word: 'Café', criterion: 'Temperatura', isSwitch: true }, { word: 'Hambúrguer', criterion: 'Temperatura', isSwitch: false }, { word: 'Presunto', criterion: 'Sabor', isSwitch: true }, { word: 'Refrigerante', criterion: 'Temperatura', isSwitch: true }, { word: 'Salada', criterion: 'Temperatura', isSwitch: false }, { word: 'Sanduíche', criterion: 'Temperatura', isSwitch: false }, { word: 'Macarrão', criterion: 'Temperatura', isSwitch: false }, { word: 'Sanduíche', criterion: 'Temperatura', isSwitch: false }, { word: 'Panqueca', criterion: 'Sabor', isSwitch: true }, { word: 'Pizza', criterion: 'Temperatura', isSwitch: true }, { word: 'Pudim', criterion: 'Temperatura', isSwitch: false }, { word: 'Queijo', criterion: 'Temperatura', isSwitch: false }, { word: 'Churros', criterion: 'Sabor', isSwitch: true }, { word: 'Panqueca', criterion: 'Temperatura', isSwitch: true }, { word: 'Churros', criterion: 'Sabor', isSwitch: true }, { word: 'Suco', criterion: 'Temperatura', isSwitch: true }, { word: 'Batata Frita', criterion: 'Temperatura', isSwitch: false }, { word: 'Refrigerante', criterion: 'Sabor', isSwitch: true }, { word: 'Queijo', criterion: 'Sabor', isSwitch: false }, { word: 'Panqueca', criterion: 'Sabor', isSwitch: false }, { word: 'Presunto', criterion: 'Sabor', isSwitch: false }, { word: 'Suco', criterion: 'Sabor', isSwitch: false }, { word: 'Sorvete', criterion: 'Sabor', isSwitch: false }, { word: 'Chá', criterion: 'Temperatura', isSwitch: true }, { word: 'Bolo', criterion: 'Sabor', isSwitch: true }, { word: 'Batata Frita', criterion: 'Sabor', isSwitch: false }, { word: 'Sanduíche', criterion: 'Sabor', isSwitch: false }, { word: 'Café', criterion: 'Sabor', isSwitch: false }, { word: 'Sushi', criterion: 'Temperatura', isSwitch: true }, { word: 'Sopa', criterion: 'Sabor', isSwitch: true }, { word: 'Café', criterion: 'Temperatura', isSwitch: true } ];
 
   // --- VARIÁVEIS DE ESTADO ---
-  let gameState = 'INSTRUCTIONS_1';
+  let gameState = 'NAME';
+  let participantId = '';
   let currentTrials = [];
   let currentIndex = 0;
   let stageNumber = 0;
@@ -66,6 +48,7 @@ const STAGE_3_DEMO = [
 
   // --- ELEMENTOS DO DOM ---
   const screens = {
+    'NAME': document.getElementById('name-screen'),
     'INSTRUCTIONS_1': document.getElementById('instructions-1'),
     'INSTRUCTIONS_2': document.getElementById('instructions-2'),
     'INSTRUCTIONS_3': document.getElementById('instructions-3'),
@@ -77,32 +60,33 @@ const STAGE_3_DEMO = [
   const testCueEl = document.getElementById('test-cue');
   const testImageEl = document.getElementById('test-image');
   const testFeedbackEl = document.getElementById('test-feedback');
-  const testProgressEl = document.getElementById('test-progress');
   const testKeyAMeaningEl = document.getElementById('test-key-a-meaning');
   const testKeyLMeaningEl = document.getElementById('test-key-l-meaning');
   const transitionKeyAEl = document.getElementById('transition-key-a-text');
   const transitionKeyLEl = document.getElementById('transition-key-l-text');
-  const restartButton = document.getElementById('restart-button');
 
   const KEY_HINTS_BY_STAGE = {
-    1: { 
-        a: '<span style="color: var(--cyan);">FRIA</span>', 
-        l: '<span style="color: var(--amber);">QUENTE</span>' 
-    },
-    2: { 
-        a: '<span style="color: var(--cyan);">DOCE</span>', 
-        l: '<span style="color: var(--amber);">SALGADA</span>' 
-    },
-    3: { 
-        a: '<span style="color: var(--cyan);">FRIA<br>ou DOCE</span>', 
-        l: '<span style="color: var(--amber);">QUENTE<br>ou SALGADA</span>' 
-    },
+    1: { a: '<span style="color: var(--cyan);">FRIA</span>', l: '<span style="color: var(--amber);">QUENTE</span>' },
+    2: { a: '<span style="color: var(--cyan);">DOCE</span>', l: '<span style="color: var(--amber);">SALGADA</span>' },
+    3: { a: '<span style="color: var(--cyan);">FRIA<br>ou DOCE</span>', l: '<span style="color: var(--amber);">QUENTE<br>ou SALGADA</span>' },
   };
 
-  // --- FUNÇÕES DE CONTROLE DE TELA ---
   function showScreen(screenKey) {
     Object.values(screens).forEach(screen => screen.classList.add('hidden'));
     screens[screenKey].classList.remove('hidden');
+  }
+
+  // --- FLUXO DE INÍCIO ---
+  function submitName() {
+    let nameInput = document.getElementById('participant-name-input').value.trim();
+    if (!nameInput) {
+        nameInput = `Participante-Visual-${Date.now()}`;
+    }
+    participantId = nameInput;
+    
+    gameState = 'INSTRUCTIONS_1';
+    showScreen('INSTRUCTIONS_1');
+    window.addEventListener('keydown', handleInstructionKey);
   }
 
   // --- LÓGICA DO TESTE ---
@@ -152,10 +136,6 @@ const STAGE_3_DEMO = [
     testImageEl.src = `src/imagens/${encodeURIComponent(word)}.jpg`;
     testImageEl.alt = word;
     testFeedbackEl.classList.add('hidden');
-
-    const isDemo = gameState.endsWith('_DEMO');
-    //testProgressEl.textContent = `${isDemo ? 'Treino' : 'Teste'}: ${currentIndex + 1} / ${currentTrials.length}`; // <-- COMENTADO PARA CONTADOR NÃO APARECER NA TELA
-
     errorCount = 0;
     startTime = Date.now();
   }
@@ -171,8 +151,6 @@ const STAGE_3_DEMO = [
   function handleTestKey(event) {
     const key = event.key.toLowerCase();
     if (key !== 'a' && key !== 'l') return;
-    
-    // Se estiver no castigo visual do erro do treino, ignora os cliques extras
     if (!testFeedbackEl.classList.contains('hidden')) return;
 
     const { word, criterion, isSwitchTrial } = getTrialInfo();
@@ -188,15 +166,11 @@ const STAGE_3_DEMO = [
 
     const isDemo = gameState.endsWith('_DEMO');
     const reactionTime = Date.now() - startTime;
-
-    // 1. CAPTURA O BOTÃO NA TELA E APLICA O EFEITO DE AFUNDAR (TÁTIL)
     const btn = document.getElementById(`key-${key}`);
     if (btn) btn.classList.add('active-press');
 
     if (key === correctKey) {
-      // --- ACERTO ---
       if (isDemo && btn) btn.classList.add('success');
-
       stageResults.push({
           trialIndex: currentIndex, stage: stageNumber, word, criterion,
           isSwitchTrial, reactionTime, errorCount, correctKey,
@@ -207,15 +181,10 @@ const STAGE_3_DEMO = [
           currentIndex++;
           renderCurrentTrial();
       }, 150);
-
   } else {
-      // --- ERRO (Aplicado em Treino e Oficial) ---
       errorCount++;
-      
       if (btn) btn.classList.add('fail');
-      testFeedbackEl.classList.remove('hidden'); // Mostra o X vermelho
-      
-      // Remove o efeito vermelho e o X depois de 500ms, mas NÃO avança a etapa
+      testFeedbackEl.classList.remove('hidden'); 
       feedbackTimeout = setTimeout(() => {
           if (btn) btn.classList.remove('active-press', 'fail');
           testFeedbackEl.classList.add('hidden');
@@ -225,7 +194,6 @@ const STAGE_3_DEMO = [
 
   function endStage() {
     window.removeEventListener('keydown', handleTestKey);
-
     const isDemo = gameState.endsWith('_DEMO');
     if (!isDemo) {
       results.push(...stageResults);
@@ -254,6 +222,7 @@ const STAGE_3_DEMO = [
       case 'STAGE_3':
         gameState = 'RESULTS';
         showScreen('RESULTS');
+        sendResultsByEmail(participantId);
         break;
     }
   }
@@ -262,11 +231,9 @@ const STAGE_3_DEMO = [
     const officialTrials = { 1: STAGE_1_OFFICIAL, 2: STAGE_2_OFFICIAL, 3: STAGE_3_OFFICIAL }[stageNum];
     pendingStage = { next: `STAGE_${stageNum}`, stageNum, trials: officialTrials };
     gameState = 'TRANSITION';
-
     const hints = KEY_HINTS_BY_STAGE[stageNum];
     transitionKeyAEl.innerHTML = hints.a;
     transitionKeyLEl.innerHTML = hints.l;
-
     showScreen('TRANSITION');
     window.addEventListener('keydown', handleTransitionKey);
   }
@@ -293,139 +260,125 @@ const STAGE_3_DEMO = [
     }
   }
 
-// Enviar por email - antes era downloadCSV
-async function sendResultsByEmail() {
-  let idParticipante = prompt("Por favor, digite o ID ou nome do participante:");
-  
-  if (!idParticipante) {
-      idParticipante = `Participante-Visual-${Date.now()}`;
+  // --- ENVIO AUTOMÁTICO DE DADOS ---
+  async function sendResultsByEmail(idParticipante) {
+    const statusText = document.getElementById('email-status-text');
+    statusText.textContent = '⏳ Enviando resultados para o servidor...';
+    statusText.style.color = 'var(--text-secondary)';
+
+    const fields = ['indice_trial', 'etapa', 'palavra', 'criterio', 'eh_troca', 'tempo_reacao_ms', 'numero_erros', 'tecla_correta'];
+    
+    const headerRow = fields.join(';');
+    const rows = results.map((r, i) => {
+        const troca = r.isSwitchTrial === undefined ? '' : (r.isSwitchTrial ? 'sim' : 'nao');
+        return [i + 1, r.stage, r.word, r.criterion, troca, r.reactionTime, r.errorCount, r.correctKey].join(';');
+    });
+    
+    const csvContent = [headerRow, ...rows].join('\n');
+
+    try {
+        const response = await fetch('/api/enviar', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                dadosCSV: csvContent,
+                participante: idParticipante
+            })
+        });
+
+        if (response.ok) {
+            statusText.innerHTML = '✅ Resultados salvos e enviados com sucesso!';
+            statusText.style.color = 'var(--cyan)';
+        } else {
+            throw new Error('Erro no servidor');
+        }
+    } catch (error) {
+        console.error("Erro:", error);
+        statusText.innerHTML = '❌ Erro no envio automático. Por favor, clique em "COPIAR DADOS BRUTOS" para não perder os dados.';
+        statusText.style.color = 'var(--red)';
+    }
   }
 
-  const btn = document.getElementById('download-csv-button');
-  btn.disabled = true;
-  btn.innerHTML = '⏳ ENVIANDO...';
+  // --- BACKUP MANUAL ---
+  function copyToClipboard() {
+    const fields = ['indice_trial', 'etapa', 'palavra', 'criterio', 'eh_troca', 'tempo_reacao_ms', 'numero_erros', 'tecla_correta'];
+    const rows = results.map((r, i) => [
+      i + 1, r.stage, r.word, r.criterion, r.isSwitchTrial === undefined ? '' : (r.isSwitchTrial ? 'sim' : 'nao'),
+      r.reactionTime, r.errorCount, r.correctKey
+    ]);
+    
+    let clipText = fields.join('\t') + '\n';
+    rows.forEach(row => { clipText += row.join('\t') + '\n'; });
+    
+    navigator.clipboard.writeText(clipText).then(() => {
+        alert("Resultados copiados! Cole (Ctrl+V) no Excel.");
+    }).catch(err => {
+        alert("Erro ao copiar.");
+    });
+  }
 
-  const fields = ['indice_trial', 'etapa', 'palavra', 'criterio', 'eh_troca', 'tempo_reacao_ms', 'numero_erros', 'tecla_correta'];
-  
-  const headerRow = fields.join(';');
-  const rows = results.map((r, i) => {
-      const troca = r.isSwitchTrial === undefined ? '' : (r.isSwitchTrial ? 'sim' : 'nao');
-      return [i + 1, r.stage, r.word, r.criterion, troca, r.reactionTime, r.errorCount, r.correctKey].join(';');
+  // --- SISTEMA DE ABORTO DE SEGURANÇA (0001) ---
+  function abortTest() {
+    if (gameState === 'RESULTS' || gameState === 'NAME' || gameState.startsWith('INSTRUCTIONS')) return;
+    
+    aborted = true;
+    window.removeEventListener('keydown', handleTestKey);
+    window.removeEventListener('keydown', handlePositioningKey);
+    window.removeEventListener('keydown', handleTransitionKey);
+    window.removeEventListener('keydown', handleInstructionKey);
+    
+    if (results.length === 0 && stageResults.length === 0) {
+        location.reload();
+        return;
+    }
+    
+    if (stageResults.length > 0) {
+        results.push(...stageResults);
+    }
+    
+    gameState = 'RESULTS';
+    showScreen('RESULTS');
+    sendResultsByEmail(participantId);
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key.length !== 1 || !/[a-z0-9]/i.test(e.key)) return;
+    abortBuffer = (abortBuffer + e.key.toLowerCase()).slice(-ABORT_CODE.length);
+    clearTimeout(abortBufferTimer);
+    abortBufferTimer = setTimeout(() => { abortBuffer = ""; }, 2000);
+    if (abortBuffer === ABORT_CODE) {
+        abortBuffer = "";
+        abortTest();
+    }
+  });
+
+  // --- INICIALIZAÇÃO ---
+  function init() {
+    gameState = 'NAME';
+    results = [];
+    stageResults = [];
+    participantId = '';
+    document.getElementById('participant-name-input').value = '';
+    
+    showScreen('NAME');
+    document.getElementById('participant-name-input').focus();
+  }
+
+  // --- CONECTORES (LISTENERS) ---
+  document.getElementById('submit-name-button').addEventListener('click', submitName);
+  document.getElementById('participant-name-input').addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') submitName();
   });
   
-  const csvContent = [headerRow, ...rows].join('\n');
+  document.getElementById('copy-bkp-button').addEventListener('click', copyToClipboard);
+  document.getElementById('exit-button').addEventListener('click', () => { location.reload(); });
 
-  try {
-      const response = await fetch('/api/enviar', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-              dadosCSV: csvContent,
-              participante: idParticipante
-          })
-      });
-
-      if (response.ok) {
-          btn.innerHTML = '✅ ENVIADO COM SUCESSO!';
-          btn.style.background = 'var(--accent)';
-          btn.style.color = '#000';
-          btn.style.opacity = '1';
-      } else {
-          throw new Error('Error en el servidor');
-      }
-  } catch (error) {
-      console.error("Error:", error);
-      btn.innerHTML = '❌ ERRO. TENTAR NOVAMENTE';
-      btn.style.background = 'var(--error)';
-      btn.style.opacity = '1';
-      btn.disabled = false;
-  }
-}
-
-// --- BACKUP: COPIAR PARA ÁREA DE TRANSFERÊNCIA ---
-function copyToClipboard() {
-  const fields = ['indice_trial', 'etapa', 'palavra', 'criterio', 'eh_troca', 'tempo_reacao_ms', 'numero_erros', 'tecla_correta'];
-  const rows = results.map((r, i) => [
-    i + 1, r.stage, r.word, r.criterion, r.isSwitchTrial === undefined ? '' : (r.isSwitchTrial ? 'sim' : 'nao'),
-    r.reactionTime, r.errorCount, r.correctKey
-  ]);
-  
-  let clipText = fields.join('\t') + '\n';
-  rows.forEach(row => { clipText += row.join('\t') + '\n'; });
-  
-  navigator.clipboard.writeText(clipText).then(() => {
-      alert("Resultados copiados! Cole (Ctrl+V) no Excel.");
-  }).catch(err => {
-      alert("Erro ao copiar. Tente baixar o CSV.");
+  document.querySelectorAll('.btn-main').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        if(e.target.id === 'submit-name-button') return; 
+        window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Space' }));
+    });
   });
-}
 
-// --- SISTEMA DE ABORTO DE SEGURANÇA (0001) ---
-function abortTest() {
-  // 1. Verifica se estamos dentro do experimento (e não nas instruções ou resultados)
-  if (gameState === 'RESULTS' || gameState.startsWith('INSTRUCTIONS')) return;
-  
-  aborted = true;
-  
-  // 2. Remove os "escutadores" de teclado ativos para travar o teste
-  window.removeEventListener('keydown', handleTestKey);
-  window.removeEventListener('keydown', handlePositioningKey);
-  window.removeEventListener('keydown', handleTransitionKey);
-  window.removeEventListener('keydown', handleInstructionKey);
-  
-  // 3. Se não houver nenhum dado coletado no array principal de resultados, recarrega a página.
-  if (results.length === 0 && stageResults.length === 0) {
-      location.reload();
-      return;
-  }
-  
-  // 4. Salva o que foi coletado até agora na etapa atual (mesmo não finalizada)
-  if (stageResults.length > 0) {
-       results.push(...stageResults);
-  }
-  
-  // 5. Muda o estado e pula direto para a tela final
-  gameState = 'RESULTS';
-  showScreen('RESULTS');
-}
-
-window.addEventListener('keydown', (e) => {
-  // Ignora teclas especiais; aceita apenas letras e números
-  if (e.key.length !== 1 || !/[a-z0-9]/i.test(e.key)) return;
-  
-  // Mantém um buffer das últimas 4 teclas digitadas (ABORT_CODE = "0001")
-  abortBuffer = (abortBuffer + e.key.toLowerCase()).slice(-ABORT_CODE.length);
-  
-  // Zera o buffer se houver pausa maior que 2 segundos na digitação
-  clearTimeout(abortBufferTimer);
-  abortBufferTimer = setTimeout(() => { abortBuffer = ""; }, 2000);
-  
-  if (abortBuffer === ABORT_CODE) {
-      abortBuffer = "";
-      abortTest();
-  }
-});
-
-// --- INICIALIZAÇÃO E REINÍCIO ---
-function init() {
-  gameState = 'INSTRUCTIONS_1';
-  results = [];
-  showScreen('INSTRUCTIONS_1');
-  window.addEventListener('keydown', handleInstructionKey);
-}
-
-// Conecta os botões corretamente
-document.getElementById('download-csv-button').addEventListener('click', sendResultsByEmail);
-document.getElementById('copy-bkp-button').addEventListener('click', copyToClipboard);
-restartButton.addEventListener('click', init);
-
-// --- SUPORTE A CLIQUE NOS BOTÕES NOVOS ---
-document.querySelectorAll('.btn-main').forEach(btn => {
-  btn.addEventListener('click', () => {
-      // Dispara um evento simulado de "Espaço"
-      window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Space' }));
-  });
-});
-
-init();
+  init();
 });
