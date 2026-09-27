@@ -79,16 +79,21 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- FLUXO DE INÍCIO ---
   function submitName() {
     let nameInput = document.getElementById('participant-name-input').value.trim();
+    
+    // Trava de segurança: se estiver vazio, avisa e cancela o avanço
     if (!nameInput) {
-        nameInput = `Participante-Visual-${Date.now()}`;
+        alert("Por favor, digite seu nome ou ID para começar o teste.");
+        document.getElementById('participant-name-input').focus();
+        return; 
     }
+    
     participantId = nameInput;
     
     gameState = 'INSTRUCTIONS_1';
     showScreen('INSTRUCTIONS_1');
     window.addEventListener('keydown', handleInstructionKey);
   }
-
+  
   // --- LÓGICA DO TESTE ---
   function startStage() {
     clearTimeout(feedbackTimeout);
