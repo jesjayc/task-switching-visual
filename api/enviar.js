@@ -12,11 +12,12 @@ export default async function handler(req, res) {
     const { dadosCSV, participante } = req.body;
 
     try {
-        // UNIMOS o BOM (FEFF) para Excel e convertemos a BASE64
+        // A conversão Base64 é OBRIGATÓRIA para anexos no Resend.
+        // O Buffer do Node.js faz essa conversão com segurança na Vercel.
         const csvBuffer = Buffer.from('\uFEFF' + dadosCSV, 'utf-8');
         const base64CSV = csvBuffer.toString('base64');
 
-        const respuestaResend = await fetch('https://api.resend.com/emails', {
+        const respostaResend = await fetch('https://api.resend.com/emails', {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${process.env.RESEND_API_KEY}`,
@@ -26,20 +27,20 @@ export default async function handler(req, res) {
                 from: 'Pesquisa Task-Switching VISUAL <onboarding@resend.dev>', 
                 to: ['bafeppgufcspa@gmail.com'],
                 subject: `Resultados do Experimento - ${participante}`,
-                html: `<p>Olá! Seguem em anexo os resultados de <strong>${participante}</strong>.</p>`,
+                html: `<p>Olá! Seguem em anexo os resultados de <strong>${participante}</strong> no Span Auditivo.</p>`,
                 attachments: [
                     {
                         filename: `resultados-${participante}.csv`,
-                        content: base64CSV // enviado em base64, agora com os dados bem formatados
+                        content: base64CSV // Aqui enviamos o código convertido e seguro
                     }
                 ]
             })
         });
 
-        if (respuestaResend.ok) {
+        if (respostaResend.ok) {
             res.status(200).json({ success: true });
         } else {
-            const erro = await respuestaResend.json();
+            const erro = await respostaResend.json();
             res.status(400).json({ error: erro });
         }
     } catch (error) {
