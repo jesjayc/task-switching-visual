@@ -273,12 +273,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const fields = ['indice_trial', 'etapa', 'palavra', 'criterio', 'eh_troca', 'tempo_reacao_ms', 'numero_erros', 'tecla_correta'];
     
-    const headerRow = fields.join(';');
     const rows = results.map((r, i) => {
         const troca = r.isSwitchTrial === undefined ? '' : (r.isSwitchTrial ? 'sim' : 'nao');
         return [i + 1, r.stage, r.word, r.criterion, troca, r.reactionTime, r.errorCount, r.correctKey].join(';');
     });
     
+    const headerRow = fields.join(';');
     const csvContent = [headerRow, ...rows].join('\n');
 
     try {
@@ -307,13 +307,13 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- BACKUP MANUAL ---
   function copyToClipboard() {
     const fields = ['indice_trial', 'etapa', 'palavra', 'criterio', 'eh_troca', 'tempo_reacao_ms', 'numero_erros', 'tecla_correta'];
-    const rows = results.map((r, i) => [
-      i + 1, r.stage, r.word, r.criterion, r.isSwitchTrial === undefined ? '' : (r.isSwitchTrial ? 'sim' : 'nao'),
-      r.reactionTime, r.errorCount, r.correctKey
-    ]);
+    const rows = results.map((r, i) => {
+        const troca = r.isSwitchTrial === undefined ? '' : (r.isSwitchTrial ? 'sim' : 'nao');
+        return [i + 1, r.stage, r.word, r.criterion, troca, r.reactionTime, r.errorCount, r.correctKey].join('\t');
+    });
     
-    let clipText = fields.join('\t') + '\n';
-    rows.forEach(row => { clipText += row.join('\t') + '\n'; });
+    const headerRow = fields.join('\t');
+    const clipText = [headerRow, ...rows].join('\n');
     
     navigator.clipboard.writeText(clipText).then(() => {
         alert("Resultados copiados! Cole (Ctrl+V) no Excel.");
