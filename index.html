@@ -23,7 +23,7 @@
 
       <!-- Tela de Instruções 1 -->
       <div id="instructions-1" class="card hidden">
-        <h1 class="title">Treino da Etapa 1: Temperatura</h1>
+        <h1 class="title">Task Switching Visual - Etapa 1: Temperatura</h1>
         <div class="instructions-content">
           <p> Será apresentada uma série de imagens, uma de cada vez, no meio da tela. O desenho de um termômetro <span class="highlight-cyan">(🌡️)</span> irá aparecer logo acima da imagem.</p>
           <p>Sua tarefa é decidir o mais rápido possível se a imagem representa uma comida <span class="highlight-cyan">FRIA</span> ou <span class="highlight-amber">QUENTE</span>.</p>
@@ -49,13 +49,13 @@
           </ul>
       </div>
       <div class="start-prompt">
-          <button class="btn-main">ESTOU PRONTO (ESPAÇO)</button>
+          <button class="btn-main">ESTOU PRONTO (A OU L)</button>
       </div>
       </div>
 
       <!-- Tela de Instruções 2 -->
       <div id="instructions-2" class="card hidden">
-        <h1 class="title">Treino da Etapa 2: Sabor</h1>
+        <h1 class="title">Task Switching Visual - Etapa 2: Sabor</h1>
         <div class="instructions-content">
           <p>Agora, a regra mudou. Será apresentada uma série de imagens, uma de cada vez, no meio da tela. O desenho de uma boca <span class="highlight-cyan">(👄)</span> irá aparecer logo acima da imagem.</p>
           <p>Sua tarefa é decidir o mais rápido possível se a imagem representa uma comida <span class="highlight-cyan">DOCE</span> ou <span class="highlight-amber">SALGADA</span>.</p>
@@ -81,13 +81,13 @@
           </ul>
       </div>
       <div class="start-prompt">
-          <button class="btn-main">ESTOU PRONTO (ESPAÇO)</button>
+          <button class="btn-main">ESTOU PRONTO (A OU L)</button>
       </div>
       </div>
 
       <!-- Tela de Instruções 3 -->
       <div id="instructions-3" class="card hidden">
-        <h1 class="title">Treino da Etapa 3: Alternando Tarefas</h1>
+        <h1 class="title">Task Switching Visual - Etapa 3: Alternando Tarefas</h1>
         <div class="instructions-content">
           <p>Agora, vamos combinar as duas tarefas. Preste atenção ao símbolo acima da imagem a cada rodada!</p>
           <div class="task-rules">
@@ -116,7 +116,7 @@
           </ul>
       </div>
       <div class="start-prompt">
-          <button class="btn-main">ESTOU PRONTO (ESPAÇO)</button>
+          <button class="btn-main">ESTOU PRONTO (A OU L)</button>
       </div>
       </div>
 
@@ -133,7 +133,7 @@
           <div><kbd>L</kbd><p style="margin-top: 10px;">Mão <strong>Direita</strong></p></div>
       </div>
         <div class="start-prompt">
-          <button class="btn-main">COMEÇAR ETAPA DE TREINO (ESPAÇO)</button>
+          <button class="btn-main">COMEÇAR ETAPA DE TREINO (A OU L)</button>
         </div>
       </div>
 
@@ -166,7 +166,7 @@
       <div id="transition-screen" class="card hidden">
         <h1 class="title">Treino Concluído</h1>
         <div class="instructions-content">
-          <p>Agora começa o <strong>teste oficial</strong> desta etapa. As regras são as mesmas do treino.</p>
+          <p>Agora passamos para o teste. As regras são as mesmas do treino.</p>
           <div class="keys-info">
             <div>
               <p>Pressione a tecla</p>
@@ -181,19 +181,14 @@
           </div>
         </div>
         <div class="start-prompt">
-          <button class="btn-main">COMEÇAR ETAPA OFICIAL (ESPAÇO)</button>
+          <button class="btn-main">COMEÇAR TESTE (A OU L)</button>
         </div>
       </div>
 
       <!-- Tela de Resultados (Final) -->
       <div id="results-screen" class="card hidden">
-        <h1 class="title">Você finalizou o teste!</h1>
-        <p id="email-status-text" class="subtitle" style="margin-bottom: 2.5rem; font-weight: 600;">⏳ Processando resultados...</p>
-        
-        <div style="display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 400px; margin: 0 auto;">
-            <button id="copy-bkp-button" class="btn-action">COPIAR DADOS BRUTOS (BKP)</button>
-            <button id="exit-button" class="btn-action" style="background: var(--bg-tertiary);">SAIR</button>
-        </div>
+        <h1 class="title">Teste finalizado.</h1>
+        <p id="email-status-text" class="subtitle" style="font-weight: 600;">⏳ Processando resultados...</p>
       </div>
     </main>
 

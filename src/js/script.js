@@ -71,6 +71,12 @@ document.addEventListener('DOMContentLoaded', () => {
     3: { a: '<span style="color: var(--cyan);">FRIA<br>ou DOCE</span>', l: '<span style="color: var(--amber);">QUENTE<br>ou SALGADA</span>' },
   };
 
+  // Telas de instrução/preparação/transição avançam com A ou L
+  function isStartKey(event) {
+    const key = (event.key || '').toLowerCase();
+    return key === 'a' || key === 'l';
+  }
+
   function showScreen(screenKey) {
     Object.values(screens).forEach(screen => screen.classList.add('hidden'));
     screens[screenKey].classList.remove('hidden');
@@ -115,7 +121,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handlePositioningKey(event) {
-    if (event.code !== 'Space') return;
+    if (!isStartKey(event)) return;
     window.removeEventListener('keydown', handlePositioningKey);
     gameState = pendingStage.next;
     stageNumber = pendingStage.stageNum;
@@ -154,6 +160,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleTestKey(event) {
+    // Ignora tecla segurada (A/L também iniciam a etapa)
+    if (event.repeat) return;
     const key = event.key.toLowerCase();
     if (key !== 'a' && key !== 'l') return;
     if (!testFeedbackEl.classList.contains('hidden')) return;
@@ -244,7 +252,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleTransitionKey(event) {
-    if (event.code !== 'Space') return;
+    if (!isStartKey(event)) return;
     window.removeEventListener('keydown', handleTransitionKey);
     gameState = pendingStage.next;
     stageNumber = pendingStage.stageNum;
@@ -260,7 +268,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function handleInstructionKey(event) {
-    if (event.code === 'Space') {
+    if (isStartKey(event)) {
       startStage();
     }
   }
@@ -299,27 +307,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     } catch (error) {
         console.error("Erro:", error);
-        statusText.innerHTML = '❌ Erro no envio automático. Por favor, clique em "COPIAR DADOS BRUTOS" para não perder os dados.';
+        statusText.innerHTML = '❌ Erro no envio automático. Por favor, avise o avaliador.';
         statusText.style.color = 'var(--red)';
     }
-  }
-
-  // --- BACKUP MANUAL ---
-  function copyToClipboard() {
-    const fields = ['indice_trial', 'etapa', 'palavra', 'criterio', 'eh_troca', 'tempo_reacao_ms', 'numero_erros', 'tecla_correta'];
-    const rows = results.map((r, i) => {
-        const troca = r.isSwitchTrial === undefined ? '' : (r.isSwitchTrial ? 'sim' : 'nao');
-        return [i + 1, r.stage, r.word, r.criterion, troca, r.reactionTime, r.errorCount, r.correctKey].join('\t');
-    });
-    
-    const headerRow = fields.join('\t');
-    const clipText = [headerRow, ...rows].join('\n');
-    
-    navigator.clipboard.writeText(clipText).then(() => {
-        alert("Resultados copiados! Cole (Ctrl+V) no Excel.");
-    }).catch(err => {
-        alert("Erro ao copiar.");
-    });
   }
 
   // --- SISTEMA DE ABORTO DE SEGURANÇA (0001) ---
@@ -374,14 +364,12 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('participant-name-input').addEventListener('keypress', (e) => {
       if (e.key === 'Enter') submitName();
   });
-  
-  document.getElementById('copy-bkp-button').addEventListener('click', copyToClipboard);
-  document.getElementById('exit-button').addEventListener('click', () => { location.reload(); });
+
 
   document.querySelectorAll('.btn-main').forEach(btn => {
     btn.addEventListener('click', (e) => {
         if(e.target.id === 'submit-name-button') return; 
-        window.dispatchEvent(new KeyboardEvent('keydown', { code: 'Space' }));
+        window.dispatchEvent(new KeyboardEvent('keydown', { key: 'a' }));
     });
   });
 
